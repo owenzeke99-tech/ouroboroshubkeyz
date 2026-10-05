@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ouroboros Hub Key</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --pink: #ff1493;
+    --hot-pink: #ff3cac;
+    --light-pink: #ff9bdd;
+    --dark: #050107;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+
+    font-family: "Rajdhani", sans-serif;
+    color: white;
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(255, 20, 147, .15),
+            transparent 32%
+        ),
+        #050107;
+}
+
+/* ==============================
+   BACKGROUND
+============================== */
+
+.background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.glow {
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 0, 140, .07);
+
+    filter: blur(110px);
+
+    animation: glowMove 9s ease-in-out infinite alternate;
+}
+
+.glow.one {
+    top: -250px;
+    left: -200px;
+}
+
+.glow.two {
+    right: -250px;
+    bottom: -250px;
+
+    animation-delay: -4s;
+}
+
+@keyframes glowMove {
+    from {
+        transform: translate(0, 0) scale(.9);
+    }
+
+    to {
+        transform: translate(100px, 70px) scale(1.25);
+    }
+}
+
+/* stars */
+
+.star {
+    position: absolute;
+
+    width: 3px;
+    height: 3px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    box-shadow:
+        0 0 7px white,
+        0 0 15px var(--pink),
+        0 0 25px var(--pink);
+
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+
+    0% {
+        transform: translateY(-30px) translateX(0);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    50% {
+        transform: translateY(50vh) translateX(35px);
+    }
+
+    100% {
+        transform: translateY(110vh) translateX(-35px);
+        opacity: 0;
+    }
+}
+
+/* ==============================
+   MAIN CARD
+============================== */
+
+.wrapper {
+    position: relative;
+    z-index: 5;
+
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+}
+
+.card {
+    position: relative;
+
+    width: min(470px, 100%);
+
+    padding: 45px 30px 32px;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.075),
+            rgba(255,255,255,.018)
+        );
+
+    border: 1px solid rgba(255, 20, 147, .3);
+
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.85),
+        0 0 55px rgba(255,0,140,.1);
+
+    animation: cardIn 1s cubic-bezier(.16,1,.3,1);
+
+    overflow: hidden;
+}
+
+@keyframes cardIn {
+    from {
+        opacity: 0;
+        transform: translateY(35px) scale(.95);
+        filter: blur(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+/* top light */
+
+.card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 10%;
+
+    width: 80%;
+    height: 2px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--pink),
+        white,
+        var(--pink),
+        transparent
+    );
+
+    box-shadow:
+        0 0 15px var(--pink),
+        0 0 30px var(--pink);
+
+    animation: lineMove 4s ease-in-out infinite;
+}
+
+@keyframes lineMove {
+    0%,100% {
+        transform: translateX(-25%);
+    }
+
+    50% {
+        transform: translateX(25%);
+    }
+}
+
+/* ==============================
+   LOGO
+============================== */
+
+.logo {
+    position: relative;
+
+    width: 125px;
+    height: 125px;
+
+    margin: 0 auto 27px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* rotating outer ring */
+
+.logo-ring {
+    position: absolute;
+
+    width: 120px;
+    height: 120px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255, 80, 180, .55);
+
+    box-shadow:
+        0 0 18px rgba(255, 20, 147, .25);
+
+    animation: rotate 8s linear infinite;
+}
+
+.logo-ring::before,
+.logo-ring::after {
+    content: "";
+
+    position: absolute;
+
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #ff70c4;
+
+    box-shadow:
+        0 0 8px #fff,
+        0 0 20px var(--pink);
+}
+
+.logo-ring::before {
+    top: -4px;
+    left: 50%;
+}
+
+.logo-ring::after {
+    bottom: -4px;
+    right: 50%;
+}
+
+.logo-ring.second {
+    width: 104px;
+    height: 104px;
+
+    border: 1px dashed rgba(255, 20, 147, .65);
+
+    animation: rotateReverse 6s linear infinite;
+}
+
+@keyframes rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotateReverse {
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+/* REAL O */
+
+.logo-o {
+    position: relative;
+
+    width: 82px;
+    height: 82px;
+
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffb4e1,
+            #ff319f 35%,
+            #c60070 65%,
+            #56002f
+        );
+
+    box-shadow:
+        0 0 15px rgba(255, 20, 147, .9),
+        0 0 35px rgba(255, 20, 147, .55),
+        0 0 70px rgba(255, 20, 147, .2);
+
+    animation: logoFloat 4s ease-in-out infinite;
+}
+
+/* hole of O */
+
+.logo-o::before {
+    content: "";
+
+    position: absolute;
+
+    width: 43px;
+    height: 43px;
+
+    border-radius: 50%;
+
+    background: #080308;
+
+    box-shadow:
+        inset 0 0 14px rgba(255,20,147,.45);
+}
+
+/* clear O highlight */
+
+.logo-o span {
+    position: relative;
+    z-index: 2;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 62px;
+
+    font-weight: 900;
+
+    line-height: 1;
+
+    color: white;
+
+    text-shadow:
+        0 0 5px white,
+        0 0 12px white,
+        0 0 25px #ff1493,
+        0 0 45px #ff1493;
+}
+
+@keyframes logoFloat {
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+}
+
+/* ==============================
+   CLEAR TITLE
+============================== */
+
+.title {
+    text-align: center;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: clamp(25px, 7vw, 36px);
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+    line-height: 1.25;
+
+    color: #ffffff;
+
+    /* CHỈ GLOW, KHÔNG GLITCH ĐÈ CHỮ */
+
+    text-shadow:
+        0 0 4px rgba(255,255,255,.9),
+        0 0 12px rgba(255,20,147,.8),
+        0 0 28px rgba(255,20,147,.5);
+
+    animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+
+    from {
+        text-shadow:
+            0 0 4px white,
+            0 0 12px rgba(255,20,147,.7),
+            0 0 25px rgba(255,20,147,.35);
+    }
+
+    to {
+        text-shadow:
+            0 0 5px white,
+            0 0 18px #ff1493,
+            0 0 38px rgba(255,20,147,.65);
+    }
+}
+
+.subtitle {
+    text-align: center;
+
+    margin-top: 9px;
+    margin-bottom: 30px;
+
+    color: rgba(255,255,255,.45);
+
+    font-size: 12px;
+
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+}
+
+/* ==============================
+   KEY
+============================== */
+
+.key-label {
+    display: block;
+
+    margin-bottom: 9px;
+
+    font-family: "Orbitron", sans-serif;
+
+    color: rgba(255,255,255,.55);
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+.key-box {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 6px;
+
+    border-radius: 15px;
+
+    background: rgba(0,0,0,.5);
+
+    border: 1px solid rgba(255,20,147,.25);
+
+    transition: .3s;
+}
+
+.key-box:hover {
+    border-color: rgba(255,20,147,.7);
+
+    box-shadow:
+        0 0 25px rgba(255,20,147,.15);
+}
+
+.key {
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 13px 10px;
+
+    text-align: center;
+
+    color: #ff91d0;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    word-break: break-all;
+
+    text-shadow:
+        0 0 8px rgba(255,20,147,.5);
+}
+
+.copy-button {
+    border: none;
+    outline: none;
+
+    padding: 13px 18px;
+
+    border-radius: 11px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff4db5,
+            #ff0780,
+            #9c0055
+        );
+
+    color: white;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 25px rgba(255,0,130,.35);
+
+    transition: .25s;
+}
+
+.copy-button:hover {
+    transform: translateY(-2px);
+
+    filter: brightness(1.15);
+
+    box-shadow:
+        0 12px 35px rgba(255,0,130,.55);
+}
+
+.copy-button:active {
+    transform: scale(.95);
+}
+
+/* ==============================
+   STATUS
+============================== */
+
+.status {
+    height: 18px;
+
+    margin-top: 13px;
+
+    text-align: center;
+
+    color: #ff72c5;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    opacity: 0;
+
+    transform: translateY(5px);
+
+    transition: .3s;
+}
+
+.status.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==============================
+   FOOTER
+============================== */
+
+.footer {
+    margin-top: 25px;
+
+    text-align: center;
+
+    color: rgba(255,255,255,.25);
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+.footer span {
+    color: #ff3ca7;
+
+    text-shadow:
+        0 0 10px rgba(255,20,147,.7);
+}
+
+/* ==============================
+   MOBILE
+============================== */
+
+@media(max-width:520px) {
+
+    .card {
+        padding: 40px 18px 27px;
+    }
+
+    .logo {
+        width: 115px;
+        height: 115px;
+    }
+
+    .logo-ring {
+        width: 110px;
+        height: 110px;
+    }
+
+    .logo-ring.second {
+        width: 95px;
+        height: 95px;
+    }
+
+    .logo-o {
+        width: 76px;
+        height: 76px;
+    }
+
+    .logo-o span {
+        font-size: 56px;
+    }
+
+    .title {
+        font-size: 24px;
+        letter-spacing: 1px;
+    }
+
+    .subtitle {
+        letter-spacing: 2px;
+    }
+
+    .key-box {
+        flex-direction: column;
+    }
+
+    .key {
+        width: 100%;
+    }
+
+    .copy-button {
+        width: 100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background">
+
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+
+</div>
+
+
+<main class="wrapper">
+
+<section class="card">
+
+    <!-- LOGO O -->
+    <div class="logo">
+
+        <div class="logo-ring"></div>
+
+        <div class="logo-ring second"></div>
+
+        <div class="logo-o">
+            <span>O</span>
+        </div>
+
+    </div>
+
+
+    <!-- TITLE -->
+    <h1 class="title">
+        Ouroboros Hub Key
+    </h1>
+
+    <p class="subtitle">
+        Key System
+    </p>
+
+
+    <!-- KEY -->
+    <label class="key-label">
+        Your Access Key
+    </label>
+
+    <div class="key-box">
+
+        <div class="key" id="key">
+            OuroborosHubKeyBsksi - Kalapwowjenodoeen
+        </div>
+
+        <button
+            class="copy-button"
+            id="copyButton"
+            onclick="copyKey()"
+        >
+            COPY
+        </button>
+
+    </div>
+
+
+    <div class="status" id="status">
+        ✓ KEY COPIED SUCCESSFULLY
+    </div>
+
+
+    <div class="footer">
+        Powered by <span>Ouroboros Hub</span>
+    </div>
+
+</section>
+
+</main>
+
+
+<script>
+
+/* ==============================
+   COPY
+============================== */
+
+function copyKey() {
+
+    const key =
+        document
+        .getElementById("key")
+        .innerText
+        .trim();
+
+    const button =
+        document.getElementById("copyButton");
+
+    const status =
+        document.getElementById("status");
+
+    navigator.clipboard.writeText(key)
+    .then(() => {
+
+        button.innerText = "COPIED ✓";
+
+        status.classList.add("show");
+
+        setTimeout(() => {
+
+            button.innerText = "COPY";
+
+            status.classList.remove("show");
+
+        }, 2200);
+
+    });
+}
+
+
+/* ==============================
+   CREATE MANY PARTICLES
+============================== */
+
+const bg =
+    document.querySelector(".background");
+
+for (let i = 0; i < 45; i++) {
+
+    const star =
+        document.createElement("div");
+
+    star.className = "star";
+
+    star.style.left =
+        Math.random() * 100 + "%";
+
+    star.style.animationDuration =
+        (7 + Math.random() * 10) + "s";
+
+    star.style.animationDelay =
+        -(Math.random() * 15) + "s";
+
+    const size =
+        1 + Math.random() * 3;
+
+    star.style.width =
+        size + "px";
+
+    star.style.height =
+        size + "px";
+
+    bg.appendChild(star);
+}
+
+</script>
+
+</body>
+</html>
